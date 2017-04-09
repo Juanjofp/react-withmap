@@ -1,6 +1,6 @@
 {
   "name": "react-withmap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "loading google maps api using script from https://github.com/fullstackreact/google-maps-react",
   "main": "build/index.js",
   "scripts": {
