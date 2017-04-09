@@ -7,6 +7,7 @@
     "server": "cd src && nodemon index.js --exec babel-node",
     "build": "babel src -d build",
     "prepublish": "npm run build",
+    "release": "np",
     "start-server": "cd src && babel-node index.js",
     "start": "cd src && nodemon index.js --exec babel-node",
     "test": "jest",
@@ -33,6 +34,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^3.19.0",
     "jest": "^19.0.2",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "np": "^2.13.1"
   }
 }
