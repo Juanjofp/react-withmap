@@ -1,0 +1,38 @@
+{
+  "name": "react-withmap",
+  "version": "1.0.0",
+  "description": "loading google maps api using script from https://github.com/fullstackreact/google-maps-react",
+  "main": "build/index.js",
+  "scripts": {
+    "server": "cd src && nodemon index.js --exec babel-node",
+    "build": "babel src -d build",
+    "prepublish": "npm run build",
+    "start-server": "cd src && babel-node index.js",
+    "start": "cd src && nodemon index.js --exec babel-node",
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juanjofp/react-withmap.git"
+  },
+  "keywords": [
+    "gmaps",
+    "react"
+  ],
+  "author": "Juanjo Franco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Juanjofp/react-withmap/issues"
+  },
+  "homepage": "https://github.com/Juanjofp/react-withmap#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^3.19.0",
+    "jest": "^19.0.2",
+    "nodemon": "^1.11.0"
+  }
+}
