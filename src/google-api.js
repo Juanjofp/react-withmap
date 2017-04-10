@@ -1,10 +1,9 @@
-import invariant from 'invariant'
+import invariant from 'invariant';
 
-export const GoogleApi = function(opts) {
-    opts = opts || {}
+export const GoogleApi = function(options) {
+    var opts = options || {};
 
-    invariant(opts.hasOwnProperty('apiKey'),
-              'You must pass an apiKey to use GoogleApi');
+    invariant(opts.hasOwnProperty('apiKey'), 'You must pass an apiKey to use GoogleApi');
 
     const apiKey = opts.apiKey;
     const libraries = opts.libraries || ['places'];
@@ -33,16 +32,16 @@ export const GoogleApi = function(opts) {
             channel: channel,
             language: language,
             region: region
-        }
+        };
 
         let paramStr = Object.keys(params)
             .filter(k => !!params[k])
             .map(k => `${k}=${params[k]}`).join('&');
 
         return `${url}?${paramStr}`;
-    }
+    };
 
     return url();
-}
+};
 
-export default GoogleApi
+export default GoogleApi;

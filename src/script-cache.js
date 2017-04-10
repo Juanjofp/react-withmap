@@ -4,21 +4,22 @@ let scriptMap = window._scriptMap || new Map();
 export const ScriptCache = (function(global) {
     global._scriptMap = global._scriptMap || scriptMap;
     return function ScriptCache(scripts) {
-        const Cache = {}
+        const Cache = {};
 
         Cache._onLoad = function(key) {
             return (cb) => {
                 let stored = scriptMap.get(key);
                 if (stored) {
                     stored.promise.then(() => {
-                        stored.error ? cb(stored.error) : cb(null, stored)
+                        stored.error ? cb(stored.error) : cb(null, stored);
                         return stored;
                     });
-                } else {
+                }
+                else {
                     // TODO:
                 }
-            }
-        }
+            };
+        };
 
         Cache._scriptTag = (key, src) => {
             if (!scriptMap.has(key)) {
@@ -37,9 +38,9 @@ export const ScriptCache = (function(global) {
                     const cleanup = () => {
                         if (global[cbName] && typeof global[cbName] === 'function') {
                             global[cbName] = null;
-                            delete global[cbName]
+                            delete global[cbName];
                         }
-                    }
+                    };
 
                     let handleResult = (state) => {
                         return (evt) => {
@@ -49,30 +50,32 @@ export const ScriptCache = (function(global) {
                                 resolve(src);
                                 // stored.handlers.forEach(h => h.call(null, stored))
                                 // stored.handlers = []
-                            } else if (state === 'error') {
+                            }
+                            else if (state === 'error') {
                                 stored.errored = true;
                                 // stored.handlers.forEach(h => h.call(null, stored))
                                 // stored.handlers = [];
-                                reject(evt)
+                                reject(evt);
                             }
                             stored.loaded = true;
 
                             cleanup();
-                        }
-                    }
+                        };
+                    };
 
                     tag.onload = handleResult('loaded');
-                    tag.onerror = handleResult('error')
+                    tag.onerror = handleResult('error');
                     tag.onreadystatechange = () => {
-                        handleResult(tag.readyState)
-                    }
+                        handleResult(tag.readyState);
+                    };
 
                     // Pick off callback, if there is one
                     if (src.match(/callback=CALLBACK_NAME/)) {
-                        src = src.replace(/(callback=)[^&]+/, `$1${cbName}`)
+                        src = src.replace(/(callback=)[^&]+/, `$1${cbName}`);
                         /*cb = */window[cbName] = tag.onload;
-                    } else {
-                        tag.addEventListener('load', tag.onload)
+                    }
+                    else {
+                        tag.addEventListener('load', tag.onload);
                     }
                     tag.addEventListener('error', tag.onerror);
 
@@ -86,11 +89,11 @@ export const ScriptCache = (function(global) {
                     error: false,
                     promise: promise,
                     tag
-                }
+                };
                 scriptMap.set(key, initialState);
             }
             return scriptMap.get(key);
-        }
+        };
 
         // let scriptTags = document.querySelectorAll('script')
         //
@@ -114,11 +117,11 @@ export const ScriptCache = (function(global) {
             Cache[key] = {
                 tag: tag,
                 onLoad: Cache._onLoad(key),
-            }
-        })
+            };
+        });
 
         return Cache;
-    }
-})(window);
+    };
+}(window));
 
 export default ScriptCache;

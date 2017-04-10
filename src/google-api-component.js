@@ -1,12 +1,12 @@
-import React/*, {PropTypes as T}*/ from 'react'
+import React/*, {PropTypes as T}*/ from 'react';
 //import ReactDOM from 'react-dom'
 
-import {ScriptCache} from './script-cache'
-import GoogleApi from './google-api'
+import {ScriptCache} from './script-cache';
+import GoogleApi from './google-api';
 
 //const defaultMapConfig = {}
-const defaultCreateCache = (options) => {
-    options = options || {};
+const defaultCreateCache = (opts) => {
+    var options = opts || {};
     const apiKey = options.apiKey;
     const libraries = options.libraries || ['places'];
     const version = options.version || '3';
@@ -27,19 +27,19 @@ export const wrapper = (options) => (WrappedComponent) => {
             super(props, context);
 
             this.scriptCache = createCache(options);
-            this.scriptCache.google.onLoad(this.onLoad.bind(this))
+            this.scriptCache.google.onLoad(this.onLoad.bind(this));
 
             this.state = {
                 loaded: false,
                 map: null,
                 google: null
-            }
+            };
         }
 
         onLoad(err, tag) {
             this._gapi = window.google;
 
-            this.setState({loaded: true, google: this._gapi})
+            this.setState({loaded: true, google: this._gapi});
         }
 
         render() {
@@ -47,17 +47,19 @@ export const wrapper = (options) => (WrappedComponent) => {
                 loaded: this.state.loaded,
                 google: window.google
             });
-
+/*
             return (
                 <div>
                     <WrappedComponent {...props}/>
-                    {/*<div ref='map'/>*/}
+                    <div ref='map'/>
                 </div>
-            )
+            );
+*/
+            return (<WrappedComponent {...props}/>);
         }
     }
 
     return Wrapper;
-}
+};
 
 export default wrapper;
