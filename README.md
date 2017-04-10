@@ -14,5 +14,5 @@ yarn add withMap
 ```
 import { withMap } from 'react-withmap';
 
-export default withMap(AnyReactComponent);
+export default withMap({ apiKey: 'apikeyfromgooglemaps' })(AnyReactComponent);
 ```
